@@ -1,3 +1,4 @@
+import { Admin } from "../../entities/Admin";
 import { User } from "../../entities/User";
 import { client } from "../../prisma/client";
 import { IUserRepository } from "../IUserRepository";
@@ -7,13 +8,13 @@ import { IUserRepository } from "../IUserRepository";
 
 export class UserRepository implements IUserRepository {
 
-    async findById(id: string):Promise<User>{
-        const user = await client.user.findFirst({
+    async findById(id: string):Promise<Admin>{
+        const user = await client.admin.findFirst({
             where: {
                 id: id
             }
         })
-        return user
+        return user;
     }
 
     async findByEmail(email: string): Promise<User>{
@@ -22,12 +23,17 @@ export class UserRepository implements IUserRepository {
                 email: email
             }
         })
-        return user
+        return user;
     }
 
-    async save(user: User): Promise<User>{
+    async save({name,email,cargo, adminId}: User): Promise<User>{
         const userData = await client.user.create({
-            data: user
+            data: {
+                name,
+                email,
+                cargo,
+                adminId            
+            }
         })
         return userData;
     }

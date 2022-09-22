@@ -8,6 +8,9 @@ export class User{
     public name: string;
     public email: string;
     public cargo : string;
+    public adminId : string;
+    
+ 
     
 
     constructor(props : Omit<User, "id"> , id?: string){

@@ -34,7 +34,6 @@ export class AdminRepository implements IAdminRepository {
             name,
             email,
             password: hashPassword
-        
           }
         })
         return adminData;
