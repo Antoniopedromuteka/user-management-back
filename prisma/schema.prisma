@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Admin{
+    id String @unique @default(uuid())
+    name String
+    email String
+    password String
+
+    user User @relation(fields: [userId], references: [id])
+
+    userId String  @unique
+
+
+    @@map("admins")
+}
+
+
+model User{
+  id String @unique @default(uuid())
+  name String
+  email String
+  cargo String
+
+  Admin Admin?
+
+  Task Tasks?
+
+
+  @@map("users")
+
+}
+
+
+model Tasks{
+
+  id String @unique @default(uuid())
+  name String
+  tipo String
+  data String
+  user User @relation(fields: [userId], references: [id])
+  userId String  @unique
+
+  TasksDeleted TasksDeleted?
+
+  @@map("tasks")
+}
+
+
+model TasksDeleted{
+
+    id String @unique @default(uuid())
+
+
+    Taks Tasks @relation(fields: [taskId], references: [id])
+
+
+    taskId String @unique
+
+
+
+}
+
