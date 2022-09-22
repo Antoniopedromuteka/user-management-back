@@ -12,29 +12,29 @@ datasource db {
 
 
 model Admin{
-    id String @unique @default(uuid())
+    id String @id @unique @default(uuid())
     name String
     email String
     password String
 
-    user User @relation(fields: [userId], references: [id])
+    user User[] 
 
-    userId String  @unique
 
+    
 
     @@map("admins")
 }
 
 
 model User{
-  id String @unique @default(uuid())
+  id String @id @unique @default(uuid())
   name String
   email String
   cargo String
+  admin Admin? @relation(fields: [adminId], references: [id])
+  adminId String
 
-  Admin Admin?
-
-  Task Tasks?
+  tasks Tasks[]
 
 
   @@map("users")
@@ -44,14 +44,19 @@ model User{
 
 model Tasks{
 
-  id String @unique @default(uuid())
+  id String @id @unique @default(uuid())
   name String
   tipo String
   data String
-  user User @relation(fields: [userId], references: [id])
-  userId String  @unique
 
-  TasksDeleted TasksDeleted?
+  user User? @relation(fields: [userId], references: [id])
+  userId String
+
+  
+  tasksDeleted TasksDeleted?  @relation(fields: [tasksDeletedId], references: [id])
+
+  tasksDeletedId String
+ 
 
   @@map("tasks")
 }
@@ -59,14 +64,12 @@ model Tasks{
 
 model TasksDeleted{
 
-    id String @unique @default(uuid())
+    id String @id @unique @default(uuid())
 
+    tasks Tasks[]
+    
 
-    Taks Tasks @relation(fields: [taskId], references: [id])
-
-
-    taskId String @unique
-
+  @@map("tasksDeleted")
 
 
 }

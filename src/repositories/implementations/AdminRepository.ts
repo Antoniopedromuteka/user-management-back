@@ -8,7 +8,7 @@ import {hash} from "bcrypt"
 
 export class AdminRepository implements IAdminRepository {
 
-    async findById(id: string): Promise<Admin | any>{
+    async findById(id: string): Promise<Admin>{
 
        const admin = await client.admin.findFirst({
             where:{
@@ -18,7 +18,7 @@ export class AdminRepository implements IAdminRepository {
         return admin
     }
 
-    async findByEmail(email: string): Promise<Admin | any>{
+    async findByEmail(email: string): Promise<Admin>{
         const admin = await client.admin.findFirst({
             where:{
                 email: email
@@ -27,10 +27,15 @@ export class AdminRepository implements IAdminRepository {
         return admin;
     }
 
-    async save(admin:Admin): Promise<Admin | any>{
-        const hashPassword = await hash(admin.password, 8);
+    async save({name,email,password}:Admin): Promise<Admin>{
+        const hashPassword = await hash(password, 8);
         const adminData = await client.admin.create({
-            data: {...admin, password: hashPassword} 
+          data:{
+            name,
+            email,
+            password: hashPassword
+        
+          }
         })
         return adminData;
     }

@@ -1,6 +1,6 @@
 
 
-import express, { application } from "express";
+import express from "express";
 import { routes } from "./routes";
 
 
