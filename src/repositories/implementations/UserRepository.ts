@@ -37,5 +37,10 @@ export class UserRepository implements IUserRepository {
         })
         return userData;
     }
+
+    async getAllUsers(): Promise<User[]>{
+        const userData = await client.user.findMany();
+        return userData
+    }
     
 }

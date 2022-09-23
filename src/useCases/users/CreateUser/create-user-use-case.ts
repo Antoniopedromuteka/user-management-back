@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
-import { UserRepository } from "../../repositories/implementations/UserRepository";
+import { User } from "../../../entities/User";
+import { UserRepository } from "../../../repositories/implementations/UserRepository";
 import { ICreateUserDTO } from "./create-user-dto";
 
 

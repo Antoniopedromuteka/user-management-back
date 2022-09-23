@@ -6,6 +6,7 @@ interface IUserRepository{
     findById: (id: string) => Promise<Admin>;
     findByEmail: (email: string) => Promise<User>;
     save : (user: User) => Promise<User>
+    getAllUsers: () => Promise<User[]>
 }
 
 
