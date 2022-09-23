@@ -68,6 +68,13 @@ export class TasksRepository implements ITasksRepository{
         })
     }
 
+
+
+    async getAllTasks(): Promise<Tasks[]>{
+        const tasksData = await client.tasks.findMany();
+
+        return tasksData;
+    }
     
 
 

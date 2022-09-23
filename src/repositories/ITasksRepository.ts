@@ -13,5 +13,6 @@ export interface ITasksRepository{
     deleteTaskById: (id: string) => Promise<Tasks>;
     save:(tasks: Tasks) => Promise<Tasks>;
     saveTaskDeleted: (tasks:dataDeleteProps) => Promise<void>;
+    getAllTasks: () => Promise<Tasks[]>;
     
 }

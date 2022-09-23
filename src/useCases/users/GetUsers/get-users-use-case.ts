@@ -11,7 +11,7 @@ export class GetUserUseCase{
         const getAllUsers = await this.userRepository.getAllUsers();
 
         if(!getAllUsers.length){
-            throw new Error("No users found ");
+            throw new Error("without users");
         }
 
         return getAllUsers;

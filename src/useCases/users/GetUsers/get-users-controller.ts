@@ -12,7 +12,7 @@ export class GetUsersController{
         try{
 
             const getAllUsers = await this.getUsersUseCase.execute();
-            return response.status(201).send(getAllUsers);            
+            return response.status(200).send(getAllUsers);            
         }catch(err){
             return response.status(400).json({message: err.message} || "unexpected error");
         }
