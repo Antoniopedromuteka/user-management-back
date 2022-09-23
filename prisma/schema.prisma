@@ -55,10 +55,7 @@ model Tasks{
   userId String?
 
   
-  tasksDeleted TasksDeleted?  @relation(fields: [tasksDeletedId], references: [id])
-  tasksDeletedId String?
- 
-
+  
   @@map("tasks")
 }
 
@@ -67,9 +64,9 @@ model TasksDeleted{
 
     id String @id @unique @default(uuid())
 
-    tasks Tasks[]
-    
-
+    name String
+    tipo String
+    data String
   @@map("tasksDeleted")
 
 

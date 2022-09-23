@@ -3,7 +3,11 @@ import { User } from "../../entities/User";
 import { client } from "../../prisma/client";
 import { ITasksRepository } from "../ITasksRepository";
 
-
+export interface dataDeleteProps{
+    name: string,
+    tipo: string,
+    data: string
+}
 
 export class TasksRepository implements ITasksRepository{
     
@@ -18,14 +22,14 @@ export class TasksRepository implements ITasksRepository{
         return tasksName;
     } 
 
-    async findById(id: string): Promise<Tasks>{
-        const taskId = await client.tasks.findFirst({
+    async findById(taskId: string): Promise<Tasks>{
+        const taskIdData = await client.tasks.findFirst({
             where:{
-                id: id
+                id: taskId
             }
         })
 
-        return taskId;
+        return taskIdData;
     }
 
     async findByUserId(userId: string): Promise<User>{
@@ -44,6 +48,24 @@ export class TasksRepository implements ITasksRepository{
             data: tasks
         })
         return taskData;
+    }
+
+    
+    async deleteTaskById(taskId: string) : Promise<Tasks>{
+        const tasksDeleted = await client.tasks.delete({
+            where:{
+                id: taskId
+            }
+        })
+
+        return tasksDeleted;
+        
+    }
+
+    async saveTaskDeleted(tasks:dataDeleteProps): Promise<void>{
+        const data = await client.tasksDeleted.create({
+            data: tasks
+        })
     }
 
     

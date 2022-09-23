@@ -1,4 +1,4 @@
-import { TasksRepository } from "../../repositories/implementations/TasksRepository";
+import { TasksRepository } from "../../../repositories/implementations/TasksRepository";
 import { CreateTasksController } from "./create-tasks-controller";
 import { CreateTasksUseCase } from "./create-tasks-use-case";
 

@@ -28,7 +28,7 @@ CREATE TABLE `tasks` (
     `tipo` VARCHAR(191) NOT NULL,
     `data` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NULL,
-    `tasksDeletedId` VARCHAR(191) NULL,
+    `tasksdeletedId` VARCHAR(191) NULL,
 
     UNIQUE INDEX `tasks_id_key`(`id`),
     PRIMARY KEY (`id`)
@@ -49,4 +49,4 @@ ALTER TABLE `users` ADD CONSTRAINT `users_adminId_fkey` FOREIGN KEY (`adminId`) 
 ALTER TABLE `tasks` ADD CONSTRAINT `tasks_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `tasks` ADD CONSTRAINT `tasks_tasksDeletedId_fkey` FOREIGN KEY (`tasksDeletedId`) REFERENCES `tasksDeleted`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `tasks` ADD CONSTRAINT `tasks_tasksdeletedId_fkey` FOREIGN KEY (`tasksdeletedId`) REFERENCES `tasksDeleted`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

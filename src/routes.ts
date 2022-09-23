@@ -2,7 +2,8 @@
 
 import {Request, request, Response, Router} from "express"
 import { createAdminController } from "./useCases/admin";
-import { createTasksController } from "./useCases/tasks";
+import { createTasksController } from "./useCases/tasks/CreateTasks";
+import { deleteTasksController } from "./useCases/tasks/DeleteTasks";
 import { createUserController } from "./useCases/users";
 
 
@@ -21,6 +22,10 @@ routes.post("/tasks/:userId", (request:Request, response:Response)=>{
     createTasksController.handle(request, response);
 })
 
+
+routes.delete("/tasks/:tasksId", (request:Request, response:Response)=>{
+    deleteTasksController.handle(request, response);
+})
  
 
 

@@ -1,5 +1,5 @@
-import { Tasks } from "../../entities/Tasks";
-import { TasksRepository } from "../../repositories/implementations/TasksRepository";
+import { Tasks } from "../../../entities/Tasks";
+import { TasksRepository } from "../../../repositories/implementations/TasksRepository";
 import { ITasksDTO } from "./create-tasks-dto";
 
 
