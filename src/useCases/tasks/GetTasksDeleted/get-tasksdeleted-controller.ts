@@ -14,7 +14,7 @@ export class GetTasksDeletedController{
             const getAllDeletedTasks = await this.getTasksDeletedUseCase.execute();
             return response.status(200).send(getAllDeletedTasks);            
         }catch(err){
-            return response.status(400).json({message: err.message} || "unexpected error");
+            return response.status(404).json({message: err.message} || "unexpected error");
         }
 
     }

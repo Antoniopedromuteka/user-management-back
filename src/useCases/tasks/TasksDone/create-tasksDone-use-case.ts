@@ -16,7 +16,11 @@ export class CreateTasksDoneUseCase{
             throw new Error("task not found")
         }
 
-        const tasksDone = new Tasks(tasksExists);
+        const tasks = {
+            ...tasksExists,
+            data: new Date().toDateString()
+        }
+        const tasksDone = new Tasks(tasks);
 
   
 
