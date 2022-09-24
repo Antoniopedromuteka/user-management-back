@@ -6,7 +6,8 @@ import { ITasksRepository } from "../ITasksRepository";
 export interface dataDeleteProps{
     name: string,
     tipo: string,
-    data: string
+    data: string;
+ 
 }
 
 export class TasksRepository implements ITasksRepository{
@@ -71,7 +72,42 @@ export class TasksRepository implements ITasksRepository{
 
 
     async getAllTasks(): Promise<Tasks[]>{
-        const tasksData = await client.tasks.findMany();
+        const tasksData = await client.tasks.findMany(
+            {
+                include:{
+                    user: true,
+                }
+            }
+        );
+
+        return tasksData;
+    }
+
+
+    async getAllTasksDeleted(): Promise<dataDeleteProps[]>{
+        const tasksData = await client.tasksDeleted.findMany();
+
+        return tasksData;
+    }
+
+    async getAllTasksDone(): Promise<Tasks[]>{
+
+        const tasksDataDone = await client.tasksDone.findMany(
+            {
+                include:{
+                    user: true,
+                }
+            }
+        );
+
+        return tasksDataDone;
+    }
+
+    async saveTaskDone(tasks: Tasks): Promise<Tasks>{
+
+        const tasksData = await client.tasksDone.create({
+            data: tasks
+        })
 
         return tasksData;
     }

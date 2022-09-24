@@ -28,7 +28,6 @@ CREATE TABLE `tasks` (
     `tipo` VARCHAR(191) NOT NULL,
     `data` VARCHAR(191) NOT NULL,
     `userId` VARCHAR(191) NULL,
-    `tasksdeletedId` VARCHAR(191) NULL,
 
     UNIQUE INDEX `tasks_id_key`(`id`),
     PRIMARY KEY (`id`)
@@ -37,8 +36,23 @@ CREATE TABLE `tasks` (
 -- CreateTable
 CREATE TABLE `tasksDeleted` (
     `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `tipo` VARCHAR(191) NOT NULL,
+    `data` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `tasksDeleted_id_key`(`id`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `tasksDone` (
+    `id` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `tipo` VARCHAR(191) NOT NULL,
+    `data` VARCHAR(191) NOT NULL,
+    `userId` VARCHAR(191) NULL,
+
+    UNIQUE INDEX `tasksDone_id_key`(`id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -49,4 +63,4 @@ ALTER TABLE `users` ADD CONSTRAINT `users_adminId_fkey` FOREIGN KEY (`adminId`) 
 ALTER TABLE `tasks` ADD CONSTRAINT `tasks_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `tasks` ADD CONSTRAINT `tasks_tasksdeletedId_fkey` FOREIGN KEY (`tasksdeletedId`) REFERENCES `tasksDeleted`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `tasksDone` ADD CONSTRAINT `tasksDone_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;

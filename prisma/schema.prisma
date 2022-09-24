@@ -36,6 +36,7 @@ model User{
   admin Admin? @relation(fields: [adminId], references: [id])
   adminId String?
   tasks Tasks[]
+  tasksdone TasksDone[]
 
 
   @@map("users")
@@ -60,6 +61,8 @@ model Tasks{
 }
 
 
+
+
 model TasksDeleted{
 
     id String @id @unique @default(uuid())
@@ -70,5 +73,22 @@ model TasksDeleted{
   @@map("tasksDeleted")
 
 
+}
+
+
+model TasksDone{
+
+  id String @id @unique @default(uuid())
+  name String
+  tipo String
+  data String
+ 
+  
+  user User? @relation(fields: [userId], references: [id])
+  userId String?
+
+  
+  
+  @@map("tasksDone")
 }
 

@@ -5,6 +5,9 @@ import { createAdminController } from "./useCases/admin";
 import { createTasksController } from "./useCases/tasks/CreateTasks";
 import { deleteTasksController } from "./useCases/tasks/DeleteTasks";
 import { getTasksController } from "./useCases/tasks/GetTasks";
+import { getTasksDeletedController } from "./useCases/tasks/GetTasksDeleted";
+import { getTasksDoneController } from "./useCases/tasks/GetTasksDone";
+import { createTasksDoneUseController } from "./useCases/tasks/TasksDone";
 import { createUserController } from "./useCases/users/CreateUser";
 import { getUsersController } from "./useCases/users/GetUsers";
 
@@ -35,6 +38,22 @@ routes.get("/tasks", (request:Request, response:Response)=>{
 routes.delete("/tasks/:tasksId", (request:Request, response:Response)=>{
     deleteTasksController.handle(request, response);
 })
+
+routes.get("/tasksdeleted", (request:Request, response:Response)=>{
+    getTasksDeletedController.handle(request, response);
+})
+
+routes.get("/tasksDone", (request:Request, response:Response)=>{
+    getTasksDoneController.handle(request, response);
+})
+
+routes.post("/tasksDone/:tasksId", (request:Request, response:Response)=>{
+    createTasksDoneUseController.handle(request, response);
+})
+
+
+
+
  
 
 
