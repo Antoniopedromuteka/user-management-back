@@ -1,7 +1,9 @@
 
 
 import {Request, request, Response, Router} from "express"
+import { AuthMiddleware } from "./Middlewares/auth-middleware";
 import { createAdminController } from "./useCases/admin";
+import { authenticationAdminController } from "./useCases/admin/authentication";
 import { createTasksController } from "./useCases/tasks/CreateTasks";
 import { deleteTasksController } from "./useCases/tasks/DeleteTasks";
 import { getTasksController } from "./useCases/tasks/GetTasks";
@@ -14,6 +16,13 @@ import { getUsersController } from "./useCases/users/GetUsers";
 
 const routes  = Router();
 
+const authMiddleware = new AuthMiddleware();
+
+routes.post("/admin/authenticate", (request:Request, response:Response) =>{
+    authenticationAdminController.handle(request, response);
+})
+
+routes.use(authMiddleware.auth);
 
 routes.post("/admin", (request:Request, response:Response)=>{
     createAdminController.handle(request, response);

@@ -8,6 +8,23 @@ import {hash} from "bcrypt"
 
 export class AdminRepository implements IAdminRepository {
 
+    private admin: Admin[];
+
+    private static INSTANCE: AdminRepository;
+
+    constructor(){
+        this.admin = []
+    }
+
+    public static getINSTANCE(): AdminRepository{
+        if (!AdminRepository.INSTANCE)
+            AdminRepository.INSTANCE = new AdminRepository();
+
+        return AdminRepository.INSTANCE;
+    }
+
+ 
+
     async findById(id: string): Promise<Admin>{
 
        const admin = await client.admin.findFirst({

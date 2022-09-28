@@ -2,6 +2,10 @@ import { Admin } from "../entities/Admin";
 
 
 
+// type getAdminProps = Omit<Admin, "id" | "password"> & {
+     
+// }
+
 interface IAdminRepository {
 
     findById: (id: string) => Promise<Admin>;
