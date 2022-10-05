@@ -43,4 +43,13 @@ export class UserRepository implements IUserRepository {
         return userData
     }
     
+
+    async getUserByAdminId(id: string): Promise<User[]>{
+        const users = await client.user.findMany({
+            where:{
+                adminId: id
+            }
+        })
+        return users;
+    }   
 }

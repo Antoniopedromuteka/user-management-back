@@ -11,10 +11,14 @@ import { getTasksDeletedController } from "./useCases/tasks/GetTasksDeleted";
 import { getTasksDoneController } from "./useCases/tasks/GetTasksDone";
 import { createTasksDoneUseController } from "./useCases/tasks/TasksDone";
 import { createUserController } from "./useCases/users/CreateUser";
+import { getUserByAdminController } from "./useCases/users/GetUserByAdmin";
 import { getUsersController } from "./useCases/users/GetUsers";
 
 
 const routes  = Router();
+
+
+
 
 const authMiddleware = new AuthMiddleware();
 
@@ -22,11 +26,20 @@ routes.post("/admin/authenticate", (request:Request, response:Response) =>{
     authenticationAdminController.handle(request, response);
 })
 
-routes.use(authMiddleware.auth);
-
 routes.post("/admin", (request:Request, response:Response)=>{
     createAdminController.handle(request, response);
 })
+
+
+
+routes.use(authMiddleware.auth);
+
+routes.get("/users/:id", (request:Request, response:Response)=>{
+    getUserByAdminController.handle(request, response);
+})
+
+
+
 
 routes.post("/users/:adminId", (request:Request, response:Response)=>{
     createUserController.handle(request, response);

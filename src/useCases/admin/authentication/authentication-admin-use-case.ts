@@ -24,12 +24,13 @@ export class AuthenticationAdminUseCase{
 
 
         const token = jwt.sign({id : admin.id}, "muteka",{
-            expiresIn: "40s"
+            expiresIn: "1d"
         });
 
         return{
             token,
             admin:{
+                id: admin.id,
                 name: admin.name,
                 email: admin.email
             }
